@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 # Importando base de vereadores eleitos shp
 df = gpd.read_file('RJ_vereador_eleitos_2024.shp')
 
-st.title('Análise de Votos por Zona Eleitoral em 2024')
+st.title('Análise de Votos por Zona Eleitoral em 2024 na Cidade do Rio de Janeiro.')
 st.write('Produzido por Christian Basilio')
 st.subheader('Vereadores Eleitos na Cidade do Rio em 2024')
 
@@ -49,6 +49,9 @@ if len(df_filtrado) > 0:
 else:
     st.write("Nenhum dado disponível para o candidato selecionado.")
     
+st.write('Os dados de todos os candidatos não são comportados na Plataforma para serem selecionáveis no mapa.')
+
+    
 # Função para carregar CSV
 @st.cache_data
 def carregar_csv(caminho):
@@ -57,8 +60,6 @@ def carregar_csv(caminho):
 # Carregando os dados
 vereadores_cor = carregar_csv('rj_votos_vereadores_raca_2024.csv')
 vereadores_genero = carregar_csv('rj_votos_vereadores_genero_2024.csv')
-
-
 
 # Criando duas colunas para exibir os gráficos lado a lado
 col1, col2 = st.columns(2)
@@ -84,10 +85,40 @@ with col2:
         labels={'Genero': 'Gênero', '%_votos_genero': 'Percentual de Votos'}
     )
     st.plotly_chart(fig_genero, use_container_width=True)
+    
+# criando uma segunda parte de 2 colunas com graficos
+# Carretando os dados para os graficos abaixo 
+# Raça e genero
+vereadores_raca_genero = carregar_csv('rj_votos_cor_raca_genero_2024.csv')
+# Carregando partigos
+vereadores_partidos = carregar_csv('rj_votos_partido_2024.csv')
+col3, col4 = st.columns(2)
+
+# criando os graficos usando as bases acima
+with col3:
+    fig_raca_genero = px.bar(
+        vereadores_raca_genero, 
+        x='Cor_cand', 
+        y='Total de Votos', 
+        color='Genero', 
+        title='Percentual de Votos por Cor e Gênero - Vereadores 2024', 
+        labels={'Raca': 'Cor do Candidato', '%_votos_raca': 'Percentual de Votos'}
+    )
+    st.plotly_chart(fig_raca_genero, use_container_width=True)
+
+with col4:
+    fig_partidos = px.bar(
+        vereadores_partidos, 
+        x='Partido', 
+        y='Total de Votos', 
+        title='Votos por Partido - Vereadores 2024', 
+        labels={'Partido': 'Partido', 'Total de Votos': 'Quantidade de Votos', '%_votos' : 'Percentual de Votos'}
+    )
+    st.plotly_chart(fig_partidos, use_container_width=True)
 
 
-st.write('A analise de Votos acima (Cor e Gênero separadamente) são de Todos os candidatos a vereador na Cidade do Rio de Janeiro nas Eleições de 2024')
-st.write('Os dados de todos os candidatos não são comportados na Plataforma.')
+
+st.write('A análise dos votos apresentada nos gráficos acima inclui todos os candidatos a vereador da cidade do Rio de Janeiro nas eleições de 2024.')
 
 
 
