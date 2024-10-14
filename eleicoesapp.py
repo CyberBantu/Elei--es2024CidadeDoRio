@@ -11,6 +11,7 @@ st.set_page_config(layout="wide")
 df = gpd.read_file('RJ_vereador_eleitos_2024.shp')
 
 st.title('Análise de Votos por Zona Eleitoral em 2024')
+st.write('Produzido por Christian Basilio')
 st.subheader('Vereadores Eleitos na Cidade do Rio em 2024')
 
 # Criando filtro do streamlit de candidatos eleitos ela coluna NM_URNA_CA
@@ -57,6 +58,8 @@ def carregar_csv(caminho):
 vereadores_cor = carregar_csv('rj_votos_vereadores_raca_2024.csv')
 vereadores_genero = carregar_csv('rj_votos_vereadores_genero_2024.csv')
 
+
+
 # Criando duas colunas para exibir os gráficos lado a lado
 col1, col2 = st.columns(2)
 
@@ -83,7 +86,8 @@ with col2:
     st.plotly_chart(fig_genero, use_container_width=True)
 
 
-
+st.write('A analise de Votos acima (Cor e Gênero separadamente) são de Todos os candidatos a vereador na Cidade do Rio de Janeiro nas Eleições de 2024')
+st.write('Os dados de todos os candidatos não são comportados na Plataforma.')
 
 
 
@@ -128,3 +132,5 @@ if len(df_filtrado_pref) > 0:
                                )
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     st.plotly_chart(fig)
+
+st.write('Fonte: TSE 2024')
