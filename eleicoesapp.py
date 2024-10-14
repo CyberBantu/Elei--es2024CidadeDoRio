@@ -49,7 +49,8 @@ if len(df_filtrado) > 0:
     st.plotly_chart(fig)
 else:
     st.write("Nenhum dado disponível para o candidato selecionado.")
-    
+
+st.caption("O mapa acima foi criado por meio do método de interpolação de pontos de cada Zona Eleitoral, possibilitando uma estimativa espacial de Influência da Zona.")
 st.write('Os dados de todos os candidatos não são comportados na Plataforma para serem selecionáveis no mapa.')
 
     
