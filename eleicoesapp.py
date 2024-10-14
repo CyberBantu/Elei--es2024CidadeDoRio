@@ -9,8 +9,9 @@ st.set_page_config(layout="wide")
 
 # Importando base de vereadores eleitos shp
 df = gpd.read_file('RJ_vereador_eleitos_2024.shp')
+# Inserindo um emoji de grafico no texto abaixo
 
-st.title('Análise de Votos por Zona Eleitoral em 2024 na Cidade do Rio de Janeiro.')
+st.title('📊 Análise de Votos por Zona Eleitoral em 2024 na Cidade do Rio de Janeiro.')
 st.write('Produzido por Christian Basilio')
 st.subheader('Vereadores Eleitos na Cidade do Rio em 2024')
 
@@ -137,7 +138,7 @@ st.title('Análise de Votos por Zona Eleitoral em 2024')
 st.subheader('Votos de Candidatos a Prefeitos do Rio de Janeiro em 2024 por Zona Eleitoral')
 
 # Criando filtro do streamlit de candidatos eleitos ela coluna NM_URNA_CA
-candidato_pref = st.selectbox('Escolha um candidato a Prefeito Eleito', df_prefeito['NM_URNA_CA'].unique())
+candidato_pref = st.selectbox('Escolha um candidato a Prefeito:', df_prefeito['NM_URNA_CA'].unique())
 
 # Filtrando os dados pelo candidato selecionado
 df_filtrado_pref = df_prefeito[df_prefeito['NM_URNA_CA'] == candidato_pref]
