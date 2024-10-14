@@ -103,7 +103,7 @@ with col3:
         x='Cor_cand', 
         y='Total de Votos', 
         color='Genero', 
-        title='Percentual de Votos por Cor e Gênero - Vereadores 2024', 
+        title='Votos por Cor e Gênero - Vereadores 2024', 
         labels={'Raca': 'Cor do Candidato', '%_votos_raca': 'Percentual de Votos'}
     )
     st.plotly_chart(fig_raca_genero, use_container_width=True)
